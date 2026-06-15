@@ -472,15 +472,15 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.1/firebase
 import { initializeFirestore, persistentLocalCache, persistentMultipleTabManager, collection, addDoc, updateDoc, deleteDoc, doc, onSnapshot, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 // ======================================================================
 
-// Nueva configuración de Firebase (sobrino-esote)
+// Nueva configuración de Firebase (tolucapos)
 const firebaseConfig = {
-  apiKey: "AIzaSyBofiuDHGpgJgjbjcf7apJiPxraBPuwekA",
-  authDomain: "sobrino-esote.firebaseapp.com",
-  projectId: "sobrino-esote",
-  storageBucket: "sobrino-esote.firebasestorage.app",
-  messagingSenderId: "445837488308",
-  appId: "1:445837488308:web:d0753b6f098c025731e7e1",
-  measurementId: "G-XRKTF946R5"
+  apiKey: "AIzaSyDfIuutWzdYTItGVVek2NM1JkQeeCfaLLs",
+  authDomain: "tolucapos-e16fd.firebaseapp.com",
+  projectId: "tolucapos-e16fd",
+  storageBucket: "tolucapos-e16fd.firebasestorage.app",
+  messagingSenderId: "968534499689",
+  appId: "1:968534499689:web:6744f913a6e40bd9d8ddf8",
+  measurementId: "G-842S9DFRDD"
 };
 
 const firebaseApp = initializeApp(firebaseConfig);
@@ -489,7 +489,6 @@ const analytics = getAnalytics(firebaseApp);
 const db = initializeFirestore(firebaseApp, {
   localCache: persistentLocalCache({tabManager: persistentMultipleTabManager()})
 });
-
 // Función para enrutar a las colecciones correctas en Firestore
 function getColeccion(tipo) {
   const map = {
