@@ -14,23 +14,28 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
   <style>
     * { font-family: 'DM Sans', sans-serif; color-scheme: dark; } /* Fuerza fondos oscuros nativos */
-    html, body { height: 100%; margin: 0; }
     ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-thumb { background: #ff0000; border-radius: 3px; } /* Scrollbar rojo */
+    ::-webkit-scrollbar-thumb { background: #ffffff; border-radius: 3px; } /* Scrollbar blanco */
     ::-webkit-scrollbar-track { background: transparent; }
     
     /* === CONTORNOS NATURALES Y ELEGANTES === */
     div.bg-surface.rounded-xl.border {
       border-width: 1px !important;
-      border-color: #1a1a1a !important; /* Borde oscuro */
-      box-shadow: 0 4px 15px rgba(255, 0, 0, 0.05) !important; /* Sombra rojiza muy suave */
+      border-color: #2a2a2a !important; /* Borde un poco más definido */
+      box-shadow: 0 4px 15px rgba(255, 255, 255, 0.03) !important; /* Sombra blanca muy suave */
     }
     
     tr.border-b {
       border-bottom-width: 1px !important;
       border-color: #1a1a1a !important; /* Separador de tablas oscuro */
     }
-    /* ======================================= */
+    
+    /* === FIX DE LECTURA === */
+    /* Fuerza que el texto dentro de los fondos blancos sea negro */
+    .bg-accent { color: #050505 !important; }
+    .bg-accent * { color: #050505 !important; }
+    .text-accent { color: #ffffff !important; }
+    /* ======================= */
     @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
     .fade-in { animation: fadeIn .3s ease-out; }
     @keyframes slideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
@@ -67,9 +72,9 @@ tailwind.config = {
         bg: '#050505',       // Casi negro absoluto
         surface: '#111111',  // Gris súper oscuro (Tarjetas y modales)
         card: '#1a1a1a',     // Gris oscuro (Bordes e inputs)
-        accent: '#ff0000',   // Rojo puro (Botones principales)
-        accent2: '#cc0000',  // Rojo más oscuro
-        danger: '#ef4444',   // Rojo alerta
+        accent: '#ffffff',   // Blanco (Botones principales - ANTES ROJO)
+        accent2: '#cccccc',  // Gris claro (Hover de botones)
+        danger: '#ef4444',   // Rojo alerta (Se mantiene para eliminar/errores)
         success: '#10b981',  // Verde (Dinero)
         warn: '#f59e0b',     // Naranja (Alertas)
         txt: '#ffffff',      // Blanco (Texto general)
@@ -4558,9 +4563,18 @@ function renderCashierPOS() {
                 showToast('Sin stock suficiente', 'warn');
               }
             } else {
-                cart.push({ id: prod.id, name: prod.name, sell_price: prod.sell_price, normal_price: prod.sell_price, buy_price: prod.buy_price||0, qty: 1, maxStock: prod.stock });
-              showToast(`${product.name} añadido`);
-            }
+                  // Se cambió 'prod' por 'product' para que coincida con la variable encontrada
+                  cart.push({ 
+                    id: product.id, 
+                    name: product.name, 
+                    sell_price: product.sell_price, 
+                    normal_price: product.sell_price, 
+                    buy_price: product.buy_price || 0, 
+                    qty: 1, 
+                    maxStock: product.stock 
+                  });
+                  showToast(`${product.name} añadido`);
+                }
             posSearch.value = ''; 
             renderPOSView(); 
           } else {
